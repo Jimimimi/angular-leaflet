@@ -1,0 +1,14 @@
+<div class="time">
+  <div class="timeButtons">
+    <i class="fa fa-pause fa-lg" ng-class="{active:buttons.isSelected(0)}" ng-click="buttons.pause()"></i>
+    <i class="fa fa-play fa-lg" ng-class="{active:buttons.isSelected(1)}" ng-click="buttons.play()"></i>
+    <i class="fa fa-forward fa-lg" ng-class="{active:buttons.isSelected(2)}" ng-click="buttons.forward()"></i>
+    <i class="fa fa-fast-forward fa-lg" ng-class="{active:buttons.isSelected(3)}" ng-click="buttons.ff()"></i>
+  </div>\
+  <div class="calendar">
+    <span class="binds"></span>
+    <h4 class="year">{{time.year}}</h4>
+    <span class="month">{{time.monthlist[time.month]}}</span>
+    <h1 class="date">{{time.day}}</h1>
+  </div>
+</div>
