@@ -4,15 +4,20 @@
   <script src="js/leaflet.js"></script>
   <script src="js/angular.min.js"></script>
   <script src="js/angular-leaflet-directive.min.js"></script>
-  <script src="js/timeCtrl.js"></script>
+  
   <script src="js/app.js"></script>
-  <script src="js/GR.geo.json.js"></script>
+  <script src="js/models.js"></script>
+  
+  <script src="components/map/map.js"></script>
+  <script src="components/map/GR.geo.json.js"></script>
+  <script src="components/time/timeCtrl.js"></script>
+  <script src="components/db/db.js"></script>
   <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
   <link rel="stylesheet" type="text/css" href="css/font-awesome-4.1.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="css/leaflet.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<body ng-controller="mapCtrl">
+<body ng-controller="mapCtrl" ng-keypress="keyPress($event)">
   <div class="ui-top-left">
     <!-- <h1>Map bounds example</h1>
     <h2>South west</h2>
@@ -35,17 +40,21 @@
     <time-control></time-control>
   </div>
   <div class="ui-bottom-left">
-    <div ng-show="geojson.selected" class="info country f32">
-        <!-- <div ng-show="geojson.selected" class="flag" ng-class="countries[geojson.selected.id]['alpha-2']|lowercase"></div> -->
+    <!-- <div ng-show="geojson.selected" class="info country f32">
+        <div ng-show="geojson.selected" class="flag" ng-class="countries[geojson.selected.id]['alpha-2']|lowercase"></div>
         {{ geojson.selected.properties.name || ''}}
-    </div>
+    </div> -->
+    <region-info ng-show="regions.selected"></region-info>
   </div>
   <div class="ui-bottom-right">
+  <h1 ng-controller="dbCtrl">{{country.name}}</h1>
+
   </div>
   <div class="ui-center">
+
     
   </div>
 
-  <leaflet id="leaf" bounds="bounds" center="center" geojson="geojson" maxbounds="maxbounds" defaults="defaults"> </leaflet>
+  <leaflet id="leaf" bounds="bounds" center="center" geojson="regions" maxbounds="maxbounds" defaults="defaults"> </leaflet>
 </body>
 </html>

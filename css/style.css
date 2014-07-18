@@ -40,20 +40,23 @@ div[class^='ui-'][class$='-right'] {
   height:50%;
 }
 .info {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 5px;
-        }
-div.country {
-            font-size: 2em;
-            font-weight: bold;
-            position: absolute;
-            bottom: 1em;
-            left: 1em;
-            z-index: 100;
-            padding: .2em .5em;
-            line-height: 1.1em;
-            text-align: center;
-        }
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 5px;
+  position: absolute;
+  bottom: 1em;
+  left: 1em;
+  z-index: 100;
+  padding: .2em .5em;
+  line-height: 1.1em;
+  text-align: center;
+ }
+.info h2 {
+  font-size: 2em;
+  font-weight: bold;
+}
+.info ul {
+  list-style: none;
+}
 
 .timeButtons {
 
