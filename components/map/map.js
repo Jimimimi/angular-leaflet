@@ -32,7 +32,7 @@ function($scope, leafletData, leafletBoundsHelpers,Time, $http) {
       //maxbounds: maxbounds,
       center: { lat:38.34165619279593, lng:24.36767578125,zoom:7},
       defaults: {
-        tileLayer: '../tiles/{z}/{x}/{y}.png',
+        tileLayer: './tiles/{z}/{x}/{y}.png',
         tileLayerOptions: {
           continuousWorld: false
         },
