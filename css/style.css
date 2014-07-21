@@ -6,7 +6,7 @@ html, body {
 body {
   width:100%;
 }
-#leaf {
+#leaf, .leaf {
   height:100%;
 }
 
