@@ -16,8 +16,9 @@ var module = angular.module('letsrule-map',
     'leafletData', 
     'leafletBoundsHelpers',
     '$http', 
+    'Logger',
 
-    function($scope, leafletData, leafletBoundsHelpers, $http) {
+    function($scope, leafletData, leafletBoundsHelpers, $http, $log) {
 
       var bounds = leafletBoundsHelpers.createBoundsFromArray([
           [ 25.958044673317843, -4.833984374999999 ],
@@ -54,7 +55,7 @@ var module = angular.module('letsrule-map',
       });
 
       function countryClick(country, event) {
-          console.log(country.properties.name);
+          $log.addEvent(country.properties.name);
           zoomToRegion(event);
       };
 

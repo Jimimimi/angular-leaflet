@@ -9,6 +9,7 @@
   <script src="js/models.js"></script>
   
   <script src="components/ui/ui-event-handler.js"></script>
+  <script src="components/game/engine.js"></script>
   <script src="components/map/map.js"></script>
   <script src="components/map/GR.geo.json.js"></script>
   <script src="components/time/time.js"></script>
@@ -19,6 +20,7 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body ng-controller = "eventHandler" ng-keypress="hotKeys($event)">
+  <db ng-controller = "gameCtrl"></db>
   <div class="ui-top-left">
     <!-- <h1>Map bounds example</h1>
     <h2>South west</h2>
@@ -48,7 +50,7 @@
     <region-info ng-show="regions.selected"></region-info>
   </div>
   <div class="ui-bottom-right">
-  <h1 ng-controller="dbCtrl">{{country.name}}</h1>
+  <dev-log></dev-log>
 
   </div>
   <div class="ui-center">

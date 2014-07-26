@@ -9,6 +9,14 @@ body {
 #leaf, .leaf {
   height:100%;
 }
+.log {
+  height: 100px;
+  width: 300px;
+  background-color: whitesmoke;
+  border: solid 1px lightgreen;
+  overflow-y: auto;
+  padding:3px;
+}
 
 div[class^="ui-"] {
   position: absolute;

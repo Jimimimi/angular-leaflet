@@ -3,13 +3,14 @@
 var app = angular.module('lets-rule', 
   [
     'letsrule-map',
-    'letsrule-eventHandler'
+    'letsrule-eventHandler',
+    'letsrule-engine'
   ]
 );
         
-app.controller('dbCtrl', function($scope, Country){
-  $scope.country = new Country(db.countries[0]);
-  console.log($scope.country);
+app.controller('dbCtrl', function($scope, Game){
+  // $scope.country = new Country(db.countries[0]);
+  // console.log($scope.country);
 
   function Factory(){
     this.id = 'fac-' + 1;
