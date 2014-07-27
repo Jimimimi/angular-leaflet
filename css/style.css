@@ -32,15 +32,15 @@ body {
   border-right: solid 1px lightgreen;
   border-bottom:solid 1px lightgreen;
   border-top: none;
-background: darkgreen;
-position: relative;
-top: -9px;
-left: 5px;
-width: 307px;
-color: rgb(202, 206, 104);
-font-family: monospace;
-font-size: 0.7pc;
-text-indent: 10px;
+  background: darkgreen;
+  position: relative;
+  top: -9px;
+  left: 6px;
+  width: 306px;
+  color: rgb(202, 206, 104);
+  font-family: monospace;
+  font-size: 0.7pc;
+  text-indent: 10px;
 
 }
 
