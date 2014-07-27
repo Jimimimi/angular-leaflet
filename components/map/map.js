@@ -16,7 +16,7 @@ var module = angular.module('letsrule-map',
     'leafletData', 
     'leafletBoundsHelpers',
     '$http', 
-    'Logger',
+    'devlog',
 
     function($scope, leafletData, leafletBoundsHelpers, $http, $log) {
 
