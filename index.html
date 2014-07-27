@@ -8,16 +8,20 @@
   <script src="js/app.js"></script>
   <script src="js/models.js"></script>
   
+  <script src="components/ui/ui-event-handler.js"></script>
+  <script src="components/game/engine.js"></script>
+  <script src="components/ui/ui-devlog.js"></script>
   <script src="components/map/map.js"></script>
   <script src="components/map/GR.geo.json.js"></script>
-  <script src="components/time/timeCtrl.js"></script>
+  <script src="components/time/time.js"></script>
   <script src="components/db/db.js"></script>
   <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
   <link rel="stylesheet" type="text/css" href="css/font-awesome-4.1.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="css/leaflet.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<body ng-controller="mapCtrl" ng-keypress="keyPress($event)">
+<body ng-controller = "eventHandler" ng-keypress="hotKeys($event)">
+  <db ng-controller = "gameCtrl"></db>
   <div class="ui-top-left">
     <!-- <h1>Map bounds example</h1>
     <h2>South west</h2>
@@ -47,14 +51,15 @@
     <region-info ng-show="regions.selected"></region-info>
   </div>
   <div class="ui-bottom-right">
-  <h1 ng-controller="dbCtrl">{{country.name}}</h1>
+  <dev-log></dev-log>
 
   </div>
   <div class="ui-center">
 
     
   </div>
-
+  <div class = "leaf" ng-controller="mapCtrl">
   <leaflet id="leaf" bounds="bounds" center="center" geojson="regions" maxbounds="maxbounds" defaults="defaults"> </leaflet>
+  </div>
 </body>
 </html>

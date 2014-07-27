@@ -1,0 +1,7 @@
+<div class="log">
+<pre>
+  <li ng-repeat="event in logs track by $index">{{event}}</li>
+</pre>
+<input ng-model="txt" ng-keypress="enter($event)"></input>
+<!-- <button ng-click="clear()">Clear log</button> -->
+</div>
