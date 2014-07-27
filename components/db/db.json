@@ -15,14 +15,52 @@
               "pops":[{
                 "poptype":"artisan",
                 "amount": 20000
-              }]
+              }],
+              "geo":[38.048091067457236, 23.70849609375]
+            },
+            {
+              "name":"Lavrio",
+              "pops":[{
+                "poptype":"artisan",
+                "amount": 3000
+              },
+              {
+                "poptype":"farmer",
+                "amount": 3000
+              },
+              {
+                "poptype":"bureaucrat",
+                "amount": 300
+              }],
+              "geo": [37.714244967649265,24.027099609375]
+            },
+            {
+              "name":"Elefsina",
+              "pops":[{
+                "poptype":"capitalist",
+                "amount": 200
+              }],
+              "geo": [38.05890484918669,23.524475097656246]
             }]
         },
         {
           "id": 11,
           "name": "Sterea Ellada",
           "population": 5000000,
-          "growth": 0.04
+          "growth": 0.04,
+          "cities":[
+            {
+              "name":"Kymi",
+              "geo":[38.63189092902837,24.1094970703125]
+            },
+            {
+              "name":"Livadia",
+              "geo":[38.4428334985915,22.87628173828125]
+            },
+            {
+              "name":"Thiva",
+              "geo":[38.29640356474841,23.323974609375]
+            },{"name":"Fokida","geo":[38.57823196583313,22.22808837890625]}]
         },
         {
           "id": 0,
@@ -104,5 +142,4 @@
       "regions": []
     }
   ]
-  
 }

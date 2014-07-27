@@ -3,8 +3,7 @@
 
 var module = angular.module('letsrule-map',
   [
-    'leaflet-directive',
-    'letsrule-models'
+    'leaflet-directive'
   ]
 )
 

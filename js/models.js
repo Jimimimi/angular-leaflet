@@ -1,5 +1,5 @@
 (function(){
-  var module = angular.module('letsrule-models',[]);
+  var module = angular.module('letsrule-models',['ui-devlog']);
 
   module.factory('POP', function(){
     function POP(data,parent){
@@ -106,7 +106,7 @@
     };
   });
 
-  module.factory('Country', function(Market, Region){
+  module.factory('Country', ['devlog','Market','Region', function($log,Market, Region){
     function Country(data){
       var self = this;
       function getRegions(){
@@ -138,9 +138,11 @@
           })
         })
       };
+
+      $log.addEvent('Loaded country : '+ data.name)
     }
 
     return Country;
-  })
+  }])
 
 })();

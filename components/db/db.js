@@ -1,10 +1,11 @@
 (function(){
-angular.module('letsrule-db',[])
+angular.module('letsrule-db',['ui-devlog'])
 .service('db',
   [
     '$http',
     '$rootScope',
-    function($http,$scope){
+    'devlog',
+    function($http,$scope,$log){
       
       var db = this;
 
@@ -13,7 +14,7 @@ angular.module('letsrule-db',[])
           db.data = res.data;
         })
         .finally(function(){
-          console.log('Data loaded correctly')
+          $log.addEvent('Data loaded correctly')
         });
 
       db.search = function(query){
