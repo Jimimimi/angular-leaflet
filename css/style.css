@@ -40,10 +40,18 @@ body {
   color: rgb(202, 206, 104);
   font-family: monospace;
   font-size: 0.7pc;
-  text-indent: 10px;
+  text-indent: 15px;
 
 }
-
+.log input:focus {
+  outline: none;
+}
+.log i {
+  position: absolute;
+  right: 300px;
+  bottom: 12px;
+  color: rgb(202, 206, 104);
+}
 div[class^="ui-"] {
   position: absolute;
   z-index: 99999;

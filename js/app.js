@@ -4,13 +4,15 @@ var app = angular.module('lets-rule',
   [
     'letsrule-map',
     'letsrule-eventHandler',
-    'letsrule-engine'
+    'letsrule-engine',
+    'ngAnimate'
   ]
 );
         
-// app.controller('dbCtrl', function($scope, Game){
-//   // $scope.country = new Country(db.countries[0]);
-//   // console.log($scope.country);
+ // app.controller('dbCtrl', function($scope){
+ //  $scope.aside = {title: 'Title', content: 'Hello Aside<br />This is a multiline message!'};
+//   $scope.country = new Country(db.countries[0]);
+//   console.log($scope.country);
 
 //   function Factory(){
 //     this.id = 'fac-' + 1;
@@ -39,9 +41,9 @@ var app = angular.module('lets-rule',
 // });
 
 
-app.directive('regionInfo', function(){
-  return {
-    restrict: 'E',
-    templateUrl: 'components/region/region.html'
-  }
-});
+// app.directive('regionInfo', function(){
+//   return {
+//     restrict: 'E',
+//     templateUrl: 'components/region/region.html'
+//   }
+// });

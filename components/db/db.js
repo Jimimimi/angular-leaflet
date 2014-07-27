@@ -1,25 +1,28 @@
 (function(){
-angular.module('letsrule-db',[])
+angular.module('letsrule-db',['ui-devlog'])
 .service('db',
   [
     '$http',
-    '$rootScope',
-    function($http,$scope){
+    '$q',
+    function($http,$q){
       
       var db = this;
 
-      $http.get('components/db/db.json')
-        .then(function(res){
-          db.data = res.data;
-        })
-        .finally(function(){
-          console.log('Data loaded correctly')
-        });
+      db.load = function(url){
+        var q = $q.defer();
 
-      db.search = function(query){
-        console.log(query);
+        $http.get(url)
+        .then( 
+          function(res){ // success
+            q.resolve(res.data);
+          },
+          function(){ // failed
+            q.reject('Failed to load database from ' + url);
+          }
+        );
+
+        return q.promise;
       }
-
     }
   ]);
 })()
