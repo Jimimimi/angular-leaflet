@@ -27,6 +27,11 @@ angular.module('letsrule-engine',['letsrule-db','ui-devlog','letsrule-models','l
     return engine.country.regions.filter(function(region){
       return region.name === q
     })[0];
+  };
+  engine.regionsById = function(q){
+    return engine.country.regions.filter(function(region){
+      return region.id === q
+    })[0];
   }
 
 

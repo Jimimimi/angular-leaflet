@@ -66,6 +66,7 @@
 
   module.factory('Region', function(City){
     function Region(data,parent){
+      this.id = data.id;
       this.name = data.name;
     
       this.economy = {

@@ -16,8 +16,9 @@ var module = angular.module('letsrule-map',
     'leafletBoundsHelpers',
     '$http', 
     'devlog',
+    'engine',
 
-    function($scope, leafletData, leafletBoundsHelpers, $http, $log) {
+    function($scope, leafletData, leafletBoundsHelpers, $http, $log, $engine) {
 
       var bounds = leafletBoundsHelpers.createBoundsFromArray([
           [ 25.958044673317843, -4.833984374999999 ],
@@ -46,15 +47,16 @@ var module = angular.module('letsrule-map',
       });
 
       $scope.$on('leafletDirectiveMap.geojsonMouseover', function(ev, leafletEvent) {
-          countryMouseover(leafletEvent);
+          regionMouseover(leafletEvent);
       });
 
       $scope.$on('leafletDirectiveMap.geojsonClick', function(ev, featureSelected, leafletEvent) {
-          countryClick(featureSelected, leafletEvent);
+          regionClick(featureSelected, leafletEvent);
       });
 
-      function countryClick(country, event) {
-          $log.addEvent(country.properties.name);
+      function regionClick(feature, event) {
+          var region = $engine.regionsById(feature.properties.id);
+          $log.addEvent(region.name);
           zoomToRegion(event);
       };
 
@@ -73,7 +75,7 @@ var module = angular.module('letsrule-map',
         });
       };
 
-      function countryMouseover(leafletEvent) {
+      function regionMouseover(leafletEvent) {
           var layer = leafletEvent.target;
           layer.setStyle({
               weight: 2,
@@ -96,12 +98,13 @@ var module = angular.module('letsrule-map',
           };
       };
 
-      function setRegions(regions){
-        regions.data.features.forEach(function(region){
-          region.properties.population = 0;
-          region.properties.gdp = 0;
-        })
-      }
+      
+      // function setRegions(regions){
+      //   regions.data.features.forEach(function(region){
+      //     region.properties.population = 0;
+      //     region.properties.gdp = 0;
+      //   })
+      // }
 
                 // Put the countries on an associative array
       // $scope.countries = {};
@@ -120,7 +123,7 @@ var module = angular.module('letsrule-map',
           }
       });
 
-      setRegions($scope.regions);
+      // setRegions($scope.regions);
     }
   ]
 );
