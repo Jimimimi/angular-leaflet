@@ -4,11 +4,13 @@ var app = angular.module('lets-rule',
   [
     'letsrule-map',
     'letsrule-eventHandler',
-    'letsrule-engine'
+    'letsrule-engine',
+    'ngAnimate'
   ]
 );
         
-// app.controller('dbCtrl', function($scope, Game){
+ // app.controller('dbCtrl', function($scope){
+ //  $scope.aside = {title: 'Title', content: 'Hello Aside<br />This is a multiline message!'};
 //   $scope.country = new Country(db.countries[0]);
 //   console.log($scope.country);
 
