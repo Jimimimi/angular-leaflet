@@ -1,7 +1,7 @@
 (function(){
 
 angular.module('letsrule-engine',['letsrule-db','ui-devlog','letsrule-models','leaflet-directive'])
-.service('engine', ['devlog','Country','leafletData',function($log,Country,leafletData){
+.service('engine', ['devlog','Country','leafletData','Pool',function($log,Country,leafletData,$Pool){
   var engine = this;
 
   engine.loadDb = function(db){
@@ -14,25 +14,66 @@ angular.module('letsrule-engine',['letsrule-db','ui-devlog','letsrule-models','l
     var cityLayer = L.layerGroup();
     engine.country.regions.forEach(function(region){
       region.cities.forEach(function(city){
-        cityLayer.addLayer(L.marker(city.geo));
+        cityLayer.addLayer(L.marker(city.geo,{name:city.name}));
       })
     })
-
+    cityLayer.eachLayer(function(layer){
+      layer.on('click', function(event){
+        var city = engine.search.cities(event.target.options.name)
+        $log.addEvent('clicked on ' + city.name);
+        console.log(city.POPS)
+      })
+    })
     leafletData.getMap().then(function (map) {
       cityLayer.addTo(map);
     });
   };
 
-  engine.regions = function(q){
-    return engine.country.regions.filter(function(region){
-      return region.name === q
-    })[0];
+  // engine.;
+  // engine.regionsById = function(q){
+  //   return engine.country.regions.filter(function(region){
+  //     return region.id === q
+  //   })[0];
+  // };
+
+  engine.search = {
+
+    regionsById: function(q){
+      return engine.country.regions.filter(function(region){
+        return region.id === q
+      })[0];
+    },
+    regions: function(q){
+      return engine.country.regions.filter(function(region){
+        return region.name === q
+      })[0];
+    },
+    cities: function(q){
+      var found = false;
+      var obj;
+      engine.country.regions.forEach(function(region){
+        region.cities.forEach(function(city){
+          if (city.name === q){
+            found = true;
+            obj = city;
+          }
+        })
+      });
+      if (!found){
+        console.log('No cities named',q,'found in the database')
+      } else {
+        return obj
+      }
+    },
+    pool: $Pool
+
+
   };
-  engine.regionsById = function(q){
-    return engine.country.regions.filter(function(region){
-      return region.id === q
-    })[0];
-  }
+
+
+  engine.render = {
+
+  };
 
 
 

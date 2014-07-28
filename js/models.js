@@ -1,8 +1,19 @@
 (function(){
   var module = angular.module('letsrule-models',['ui-devlog']);
+  
+  module.service('Pool', function(){
+    angular.extend(this, {
+      POPS:[],
+      cities:[],
+      regions:[],
+      countries:[],
+      companies:[]
+    });
 
-  module.factory('POP', function(){
+  });
+  module.factory('POP', function(Pool){
     function POP(data,parent){
+      this.id = Pool.POPS.length
       this.poptype = data.poptype;
       this.amount = data.amount;
       this.economy = {
@@ -33,13 +44,16 @@
           console.log(this.amount +' '+this.poptype+'s from ' + this.location +' consumed ' + (total*1000) +' kgs of '+ i)
         }
       };
+
+      Pool.POPS.push(this);
     }
 
     return POP;
   });
 
-  module.factory('City', function(POP){
+  module.factory('City', function(POP,Pool){
     function City(data,parent){
+      this.id = Pool.cities.length;
       this.name = data.name;
       this.economy = {
         "GDP": 0,
@@ -59,6 +73,8 @@
         return arr;
       };
       this.POPS = getPops();
+
+      Pool.cities.push(this);
     }
 
     return City;
