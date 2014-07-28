@@ -4,7 +4,7 @@
   var module = angular.module('letsrule-POP',[
     
     ] )
-  .factory('POP', ['$scope', function($scope){
+  .factory('POP', [function(){
     function POP(popdata) {
       if (popdata) {
         this.setData(popdata);

@@ -1,11 +1,35 @@
 (function(){
 
-angular.module('letsrule-engine',['letsrule-db','ui-devlog','letsrule-models','leaflet-directive'])
-.service('engine', ['devlog','Country','leafletData','Pool',function($log,Country,leafletData,$Pool){
-  var engine = this;
+angular.module('letsrule-engine',
+  [
+  'letsrule-db',
+  'ui-devlog',
+  'ui-window',
+  'letsrule-models',
+  'leaflet-directive',
+  ]
+)
+.service('engine', 
+  [
+  'devlog',
+  'Country',
+  'leafletData',
+  'Pool',
+  'windowManager',
 
+  function($log,Country,leafletData,$Pool, $manager){
+  var engine = this;
+  engine.windowManager = $manager;
+  engine.ui = {
+    toggle: function(){
+     $manager.toggle();
+    },
+    render: function(data){
+      $manager.set('content',data);
+    }
+  };
   engine.loadDb = function(db){
-    // var q = $q.defer();
+  
     window.engine = engine;
     engine.db = db;
     $log.addEvent('Game engine loaded')
@@ -80,7 +104,8 @@ angular.module('letsrule-engine',['letsrule-db','ui-devlog','letsrule-models','l
 }])
 
 
-.controller('gameCtrl', ['db','engine','devlog', function($db,$engine,$log){
+.controller('gameCtrl', ['$scope','db','engine','devlog', function($scope,$db,$engine,$log){
+  $scope.$id = 'Game engine';
   $db.load('components/db/db.json')
   .then(
     function(data){

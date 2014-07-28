@@ -73,7 +73,13 @@
         return arr;
       };
       this.POPS = getPops();
-
+      this.getPopulation = function(){
+        var amount = 0;
+        this.POPS.forEach(function(pop){
+          amount += pop.amount;
+        })
+        return amount;
+      }
       Pool.cities.push(this);
     }
 

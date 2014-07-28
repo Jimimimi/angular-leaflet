@@ -169,12 +169,16 @@ var module = angular.module('TimeSvc',[])
   // !!!!!!!!!! ^ Calendar Model ^ !!!!!!!!!!!! //
 
 .controller('timeCtrl', function($scope,Calendar){
-    $scope.time  = Calendar;    
+    angular.extend($scope, {
+      $id: 'Time controller',
+      time: Calendar
+    })  
 })
 
 .directive('timeControl', function(){
   return {
     restrict: 'E',
+    scope: {},
     controller: 'timeCtrl',
     templateUrl: 'components/time/time.html'
   }

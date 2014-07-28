@@ -36,7 +36,7 @@ angular.module('ui-devlog',[])
         log.events.push(event);
       };
       
-      this.exec = function(input,scope){
+      this.exec = function(input){
         if (devFunctions.hasOwnProperty(input)) {
           devFunctions[input]();   
         } else {
@@ -57,10 +57,11 @@ angular.module('ui-devlog',[])
     scope: {}, // {} = isolate, true = child, false/undefined = no change
     controller: function(devlog,$scope,$element){
       angular.extend($scope, {
+        $id : 'Developer console',
         logs : devlog.events,
         enter: function($event) {
           if ($event.which === 13) {
-            devlog.exec($scope.txt,$scope);
+            devlog.exec($scope.txt);
             $scope.txt = ''
           }
         }
