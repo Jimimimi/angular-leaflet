@@ -56,7 +56,7 @@ var module = angular.module('letsrule-map',
       });
 
       function regionClick(feature, event) {
-          var region = $engine.regionsById(feature.properties.id);
+          var region = $engine.search.regionsById(feature.properties.id);
           $log.addEvent(region.name);
           zoomToRegion(event);
       };

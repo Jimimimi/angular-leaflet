@@ -206,3 +206,27 @@ div[class^='ui-'][class$='-right'] {
   width: 200px;
   border: solid 1px red;
 }
+.menu {
+   opacity: 0.5;
+}
+.menu:hover {
+  opacity: 1;
+}
+
+.menu .flag {
+  background: url('images/greece_flag.png');
+  background-size: cover;
+  position: absolute;
+  height: 150px;
+  width: 150px;
+  bottom: 10px;
+  border-radius: 150px;
+  border: solid 5px whitesmoke;
+/*  box-shadow: 0 0 20px;
+*/  cursor: pointer;
+ 
+}
+
+.clicked {
+  box-shadow: 0 0 5px 5px inset;
+}

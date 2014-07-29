@@ -1,40 +1,29 @@
 (function(){
 var module = angular.module('ui-window',[])
-.service('windowManager', ['$q',function($q){
-  var manager = this,
-    q = $q.defer();
-
-  this.params = {
+.factory('windowManager', [function(){
+  var manager = {
     isOpen: false,
     content: ''
   };
 
-  this.get = {
-    isOpen : function(){
-      return manager.params.isOpen;
+  return {
+    isOpen: function(){
+      return manager.isOpen;
     },
-    content: function(){
-      return manager.params.content;
-    }
-  }
-  
-  this.observe = function(){
-    return q.promise;
-  }
-
-  this.set = function(param, content){
-    manager.params[param] = content;
-    q.notify(manager.params);
-  }
-
-  this.toggle = function(){
-   if (!manager.isOpen){
-      manager.set('isOpen',true);
-    } else if (manager.isOpen){
-      manager.set('isOpen',false);
+    toggle: function(){
+      if (!manager.isOpen){
+        manager.isOpen = true;
+      } else {
+        manager.isOpen = false;
+      }
+    },
+    setContent: function(content){
+      manager.content = content;
+    },
+    getContent: function(){
+      return manager.content;
     }
   };
-
 }])
 .directive('uiWindow', ['windowManager', function(windowManager){
   // Runs during compile
@@ -44,10 +33,19 @@ var module = angular.module('ui-window',[])
     // terminal: true,
     scope: true, // {} = isolate, true = child, false/undefined = no change
     controller: function($scope, $element, $attrs, $transclude) {
-      $scope.$id = 'Window Controller'
-      $scope.isOpen = windowManager.get.isOpen
-      $scope.content = windowManager.get.content
-      
+      angular.extend($scope, {
+        $id: 'Window controller'
+        //,
+        //isOpen: windowManager.isOpen(),
+        //content: windowManager.getContent()
+      });
+
+      $scope.$watch(windowManager.isOpen, function(){
+        $scope.isOpen = windowManager.isOpen();
+      });
+      $scope.$watch(windowManager.getContent, function(){
+        $scope.content = windowManager.getContent()
+      })
     },
     // require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
     restrict: 'E',

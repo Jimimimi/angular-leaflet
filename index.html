@@ -13,6 +13,7 @@
   <script src="components/game/engine.js"></script>
   <script src="components/ui/ui-devlog.js"></script>
   <script src="components/ui/ui-window.js"></script>
+  <script src="components/ui/ui-menu.js"></script>
   <script src="components/map/map.js"></script>
   <script src="components/map/GR.geo.json.js"></script>
   <script src="components/time/time.js"></script>
@@ -22,48 +23,48 @@
   <link rel="stylesheet" type="text/css" href="css/angular-motion.min.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<body ng-controller = "eventHandler" ng-keypress="hotKeys($event)">
-  <db ng-controller = "gameCtrl"></db>
-  <div class="ui-top-left">
-    <!-- <h1>Map bounds example</h1>
-    <h2>South west</h2>
-    <form>
-        Lat : <input type="number" step="any" ng-model="bounds.southWest.lat" />
-        Lng : <input type="number" step="any" ng-model="bounds.southWest.lng" />
-    </form>
+<body ng-controller = "gameEngineCtrl" ng-keypress="hotKeys($event)">
+  
+  <ui-plane ng-controller = "eventHandler" ng-keypress="hotKeys($event)">
+    <div class="ui-top-left">
+      <!-- <h1>Map bounds example</h1>
+      <h2>South west</h2>
+      <form>
+          Lat : <input type="number" step="any" ng-model="bounds.southWest.lat" />
+          Lng : <input type="number" step="any" ng-model="bounds.southWest.lng" />
+      </form>
 
-    <h2>North east</h2>
-    <form>
-        Lat : <input type="number" step="any" ng-model="bounds.northEast.lat" />
-        Lng : <input type="number" step="any" ng-model="bounds.northEast.lng" />
-    </form>
-    <h2>Center</h2>
-    <form>
-      Lat : <input type="number" step="any" ng-model="center.lat" />
-        Lng : <input type="number" step="any" ng-model="center.lng" /> -->
-  </div>
-  <div class="ui-top-right">
-    <time-control></time-control>
-  </div>
-  <div class="ui-bottom-left">
-    <!-- <div ng-show="geojson.selected" class="info country f32">
-        <div ng-show="geojson.selected" class="flag" ng-class="countries[geojson.selected.id]['alpha-2']|lowercase"></div>
-        {{ geojson.selected.properties.name || ''}}
-    </div> -->
-    <region-info ng-show="regions.selected"></region-info>
-  </div>
-  <div class="ui-bottom-right">
-  <dev-log></dev-log>
+      <h2>North east</h2>
+      <form>
+          Lat : <input type="number" step="any" ng-model="bounds.northEast.lat" />
+          Lng : <input type="number" step="any" ng-model="bounds.northEast.lng" />
+      </form>
+      <h2>Center</h2>
+      <form>
+        Lat : <input type="number" step="any" ng-model="center.lat" />
+          Lng : <input type="number" step="any" ng-model="center.lng" /> -->
+    </div>
+    <div class="ui-top-right">
+      <time-control></time-control>
+    </div>
+    <div class="ui-bottom-left">
+      <ui-menu></ui-menu>
+    </div>
+    <div class="ui-center">
+      <ui-window>
 
-  </div>
-  <div class="ui-center">
-    <ui-window>
+      </ui-window>
+      
+    </div>
+    <div class = "leaf" ng-controller="mapCtrl">
+    <leaflet id="leaf" bounds="bounds" center="center" geojson="regions" maxbounds="maxbounds" defaults="defaults"> </leaflet>
+    </div>
 
-    </ui-window>
-    
-  </div>
-  <div class = "leaf" ng-controller="mapCtrl">
-  <leaflet id="leaf" bounds="bounds" center="center" geojson="regions" maxbounds="maxbounds" defaults="defaults"> </leaflet>
-  </div>
+  </ui-plane>
+
+    <div class="ui-bottom-right">
+    <dev-log></dev-log>
+
+    </div>
 </body>
 </html>

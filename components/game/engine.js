@@ -5,6 +5,7 @@ angular.module('letsrule-engine',
   'letsrule-db',
   'ui-devlog',
   'ui-window',
+  'ui-menu',
   'letsrule-models',
   'leaflet-directive',
   ]
@@ -25,7 +26,7 @@ angular.module('letsrule-engine',
      $manager.toggle();
     },
     render: function(data){
-      $manager.set('content',data);
+      $manager.setContent(data);
     }
   };
   engine.loadDb = function(db){
@@ -104,7 +105,7 @@ angular.module('letsrule-engine',
 }])
 
 
-.controller('gameCtrl', ['$scope','db','engine','devlog', function($scope,$db,$engine,$log){
+.controller('gameEngineCtrl', ['$scope','db','engine','devlog', function($scope,$db,$engine,$log){
   $scope.$id = 'Game engine';
   $db.load('components/db/db.json')
   .then(
