@@ -17,8 +17,9 @@ angular.module('letsrule-engine',
   'leafletData',
   'Pool',
   'windowManager',
+  '$rootScope',
 
-  function($log,Country,leafletData,$Pool, $manager){
+  function($log,Country,leafletData,$Pool, $manager,$rootScope){
   var engine = this;
   engine.windowManager = $manager;
   engine.ui = {
@@ -39,6 +40,11 @@ angular.module('letsrule-engine',
     var cityLayer = L.layerGroup();
     engine.country.regions.forEach(function(region){
       region.cities.forEach(function(city){
+        $rootScope.$on('time:Day', function(){
+          city.POPS.forEach(function(pop){
+            pop.grow();
+          })
+        })
         cityLayer.addLayer(L.marker(city.geo,{name:city.name}));
       })
     })

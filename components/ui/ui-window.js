@@ -20,6 +20,9 @@ var module = angular.module('ui-window',[])
     open: function(){
       manager.isOpen = true;
     },
+    close: function(){
+      manager.isOpen = false;
+    },
     setContent: function(content){
       manager.content = content;
     },
@@ -38,6 +41,8 @@ var module = angular.module('ui-window',[])
     controller: function($scope, $element, $attrs, $transclude) {
       function getTemplate(content_type){
         switch(content_type){
+          case 'pop':
+            return './components/pop/pop.html'
           case 'city':
             return './components/city/city.html'
           case 'region':
@@ -45,10 +50,13 @@ var module = angular.module('ui-window',[])
         }
       }
       angular.extend($scope, {
-        $id: 'Window controller'
-        //,
-        //isOpen: windowManager.isOpen(),
-        //content: windowManager.getContent()
+        $id: 'Window controller',
+        closeWindow: function(){
+          windowManager.close();
+        },
+        render: function(content){
+          windowManager.setContent(content);
+        }
       });
 
       $scope.$watch(windowManager.isOpen, function(){

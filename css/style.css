@@ -202,9 +202,18 @@ div[class^='ui-'][class$='-right'] {
 }
 
 .windowWidget {
-  height:200px;
-  width: 200px;
-  border: solid 1px red;
+  height:100%;
+  width: 100%;
+  background: #222;
+  opacity: 0.8;
+  border-radius: 3px;
+  border: solid 2px goldenrod;
+  box-shadow: 0 0 5px;
+  padding:10px;
+  color: whitesmoke;
+}
+.windowWidget a, a:hover,a:active,a:visited {
+  color: goldenrod;
 }
 .menu {
    opacity: 0.5;
@@ -229,4 +238,10 @@ div[class^='ui-'][class$='-right'] {
 
 .clicked {
   box-shadow: 0 0 5px 5px inset;
+}
+
+.btn-close {
+  cursor: pointer;
+  font-size: 1em;
+  color:whitesmoke;
 }

@@ -1,5 +1,8 @@
-<div class = "windowWidget" ng-show="isOpen">
+<div class = "ui-center" ng-show="isOpen">
+<div class = "windowWidget">
+  <i class = "btn-close fa fa-times" style="float:right;" ng-click="closeWindow()"></i>
   
     <div ng-include src="content.template"></div>
   
+</div>
 </div>
