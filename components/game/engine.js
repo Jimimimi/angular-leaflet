@@ -46,7 +46,11 @@ angular.module('letsrule-engine',
       layer.on('click', function(event){
         var city = engine.search.cities(event.target.options.name)
         $log.addEvent('clicked on ' + city.name);
-        console.log(city.POPS)
+        $manager.setContent({
+          content_type: 'city',
+          data: city
+        });
+        $manager.open();
       })
     })
     leafletData.getMap().then(function (map) {

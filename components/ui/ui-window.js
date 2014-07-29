@@ -17,6 +17,9 @@ var module = angular.module('ui-window',[])
         manager.isOpen = false;
       }
     },
+    open: function(){
+      manager.isOpen = true;
+    },
     setContent: function(content){
       manager.content = content;
     },
@@ -33,6 +36,14 @@ var module = angular.module('ui-window',[])
     // terminal: true,
     scope: true, // {} = isolate, true = child, false/undefined = no change
     controller: function($scope, $element, $attrs, $transclude) {
+      function getTemplate(content_type){
+        switch(content_type){
+          case 'city':
+            return './components/city/city.html'
+          case 'region':
+            return './components/region/region.html'
+        }
+      }
       angular.extend($scope, {
         $id: 'Window controller'
         //,
@@ -45,7 +56,8 @@ var module = angular.module('ui-window',[])
       });
       $scope.$watch(windowManager.getContent, function(){
         $scope.content = windowManager.getContent()
-      })
+        $scope.content.template = getTemplate($scope.content.content_type)
+      });
     },
     // require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
     restrict: 'E',
