@@ -36,7 +36,7 @@ angular.module('ui-devlog',[])
         log.events.push(event);
       };
       
-      this.exec = function(input,scope){
+      this.exec = function(input){
         if (devFunctions.hasOwnProperty(input)) {
           devFunctions[input]();   
         } else {
@@ -44,6 +44,7 @@ angular.module('ui-devlog',[])
             log.addEvent('- try using the "help" command')
         };  
       }
+
     }
   ]
 )
@@ -57,14 +58,21 @@ angular.module('ui-devlog',[])
     scope: {}, // {} = isolate, true = child, false/undefined = no change
     controller: function(devlog,$scope,$element){
       angular.extend($scope, {
+        $id : 'Developer console',
         logs : devlog.events,
+        txt: '',
         enter: function($event) {
-          if ($event.which === 13) {
-            devlog.exec($scope.txt,$scope);
+          if ($event.which === 13 && $scope.txt !== '') {
+            devlog.exec($scope.txt);
             $scope.txt = ''
           }
-        }
+          if ($event.which == 27) {
+            $scope.isOpen = false;
+          }
+        },
+        isOpen: true
       });
+      window.scoper = $scope;
       
     },
     // require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements

@@ -15,6 +15,7 @@ var module = angular.module('letsrule-eventHandler',
     function($scope,Time){
   
       // Hotkeys
+      $scope.$id = 'Event handler'
       $scope.hotKeys = function($event){
 
         function toggleTime(){

@@ -75,7 +75,6 @@ div[class^='ui-'][class$='-right'] {
 }
 
 .ui-center {
-  display: none;
   top:25%;
   left:25%;
   width:50%;
@@ -200,4 +199,49 @@ div[class^='ui-'][class$='-right'] {
   left: 5%;
   z-index: -1;
   box-shadow: 0 1px 3px #ccc;
+}
+
+.windowWidget {
+  height:100%;
+  width: 100%;
+  background: #222;
+  opacity: 0.8;
+  border-radius: 3px;
+  border: solid 2px goldenrod;
+  box-shadow: 0 0 5px;
+  padding:10px;
+  color: whitesmoke;
+}
+.windowWidget a, a:hover,a:active,a:visited {
+  color: goldenrod;
+}
+.menu {
+   opacity: 0.5;
+}
+.menu:hover {
+  opacity: 1;
+}
+
+.menu .flag {
+  background: url('images/greece_flag.png');
+  background-size: cover;
+  position: absolute;
+  height: 150px;
+  width: 150px;
+  bottom: 10px;
+  border-radius: 150px;
+  border: solid 5px whitesmoke;
+/*  box-shadow: 0 0 20px;
+*/  cursor: pointer;
+ 
+}
+
+.clicked {
+  box-shadow: 0 0 5px 5px inset;
+}
+
+.btn-close {
+  cursor: pointer;
+  font-size: 1em;
+  color:whitesmoke;
 }

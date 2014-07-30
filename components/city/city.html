@@ -1,0 +1,7 @@
+<h1>{{content.data.name}}</h1>
+<span>Population: {{content.data.getPopulation()}}</span>
+<ul class = "pops">Notable population groups:
+<li ng-repeat="pop in content.data.POPS">
+  {{pop.amount}} <a href="#" ng-click="render({content_type:'pop',data:pop})">{{pop.poptype}}s</a>
+</li>
+</ul>

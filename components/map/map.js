@@ -30,6 +30,7 @@ var module = angular.module('letsrule-map',
           }
 
       angular.extend($scope, {
+          $id : 'Map controller',
           bounds: bounds,
           //maxbounds: maxbounds,
           center: { lat:38.34165619279593, lng:24.36767578125,zoom:7},
@@ -55,7 +56,7 @@ var module = angular.module('letsrule-map',
       });
 
       function regionClick(feature, event) {
-          var region = $engine.regionsById(feature.properties.id);
+          var region = $engine.search.regionsById(feature.properties.id);
           $log.addEvent(region.name);
           zoomToRegion(event);
       };
