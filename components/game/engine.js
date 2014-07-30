@@ -39,17 +39,58 @@ angular.module('letsrule-engine',
     $log.addEvent('Game engine loaded')
     engine.country = new Country(db.countries[0]);
     
+    // ========== cities -- should move to Map.js
+
+    var cityIcons = {
+          large: L.icon({
+            iconUrl: './js/images/city_l.png',
+            shadowUrl: './js/images/marker-shadow.png',
+            iconSize:     [35, 42], // size of the icon
+            shadowSize:   [43, 40], // size of the shadow
+            iconAnchor:   [17, 40], // point of the icon which will correspond to marker's location
+            shadowAnchor: [10, 35],  // the same for the shadow
+            popupAnchor:  [0, -38] // point from which the popup should open relative to the iconAnchor
+          }),
+          small: L.icon({
+            iconUrl: './js/images/city_s.png',
+            shadowUrl: './js/images/marker-shadow.png',
+            iconSize:     [35, 42], // size of the icon
+            shadowSize:   [43, 40], // size of the shadow
+            iconAnchor:   [17, 40], // point of the icon which will correspond to marker's location
+            shadowAnchor: [10, 35],  // the same for the shadow
+            popupAnchor:  [0, -32] // point from which the popup should open relative to the iconAnchor
+          })
+        };
+
+        function checkCitySize(city){
+          if (city.properties.population < 30000) {
+            return {icon:cityIcons.small}
+          }
+          else {return {icon:cityIcons.large}}
+        }
+
     var cityLayer = L.layerGroup();
+
+
     engine.country.regions.forEach(function(region){
       region.cities.forEach(function(city){
+
         $rootScope.$on('time:Day', function(){
           city.POPS.forEach(function(pop){
             pop.grow();
           })
         })
-        cityLayer.addLayer(L.marker(city.geo,{name:city.name}));
+        if (city.getPopulation() < 1000) {
+          city.options = {icon: cityIcons.small};
+        }
+        if (city.getPopulation() > 1000) {
+          city.options = {icon: cityIcons.large};
+        }
+
+        cityLayer.addLayer(L.marker(city.geo,{name:city.name, icon: city.options.icon}));
       })
     })
+
     cityLayer.eachLayer(function(layer){
       layer.on('click', function(event){
         var city = engine.search.cities(event.target.options.name)
@@ -65,6 +106,7 @@ angular.module('letsrule-engine',
       cityLayer.addTo(map);
     });
   };
+  // ========== cities -- should move to Map.js
 
   // engine.;
   // engine.regionsById = function(q){
