@@ -8,6 +8,8 @@ angular.module('letsrule-engine',
   'ui-menu',
   'letsrule-models',
   'leaflet-directive',
+  'pop-module',
+  'city-module',
   ]
 )
 .service('engine', 

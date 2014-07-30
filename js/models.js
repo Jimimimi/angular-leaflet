@@ -14,8 +14,10 @@
   module.factory('POP', function(Pool){
     function POP(data,parent){
       this.id = Pool.POPS.length
+      this._parent = parent;
       this.poptype = data.poptype;
       this.amount = data.amount;
+      this.location = parent.name;
       this.economy = {
         income: 0,
         expenses: 0,

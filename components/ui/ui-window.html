@@ -1,8 +1,14 @@
 <div class = "ui-center" ng-show="isOpen">
 <div class = "windowWidget">
+
   <i class = "btn-close fa fa-times" style="float:right;" ng-click="closeWindow()"></i>
   
-    <div ng-include src="content.template"></div>
+    <div ng-switch on = "content.content_type">
+      <pop-info ng-switch-when="pop"></pop-info>
+      <city-info ng-switch-when="city"></city-info>
+      <region-info ng-switch-when="region"></region-info>
+      <company-info ng-switch-when="company"></company-info>
+    </div>
   
 </div>
 </div>

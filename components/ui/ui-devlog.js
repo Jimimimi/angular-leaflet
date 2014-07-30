@@ -44,6 +44,7 @@ angular.module('ui-devlog',[])
             log.addEvent('- try using the "help" command')
         };  
       }
+
     }
   ]
 )
@@ -59,13 +60,19 @@ angular.module('ui-devlog',[])
       angular.extend($scope, {
         $id : 'Developer console',
         logs : devlog.events,
+        txt: '',
         enter: function($event) {
-          if ($event.which === 13) {
+          if ($event.which === 13 && $scope.txt !== '') {
             devlog.exec($scope.txt);
             $scope.txt = ''
           }
-        }
+          if ($event.which == 27) {
+            $scope.isOpen = false;
+          }
+        },
+        isOpen: true
       });
+      window.scoper = $scope;
       
     },
     // require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements

@@ -1,4 +1,5 @@
-<h1>{{content.data.poptype}}s --> {{content.data.location}}</h1>
+<h1>{{content.data.poptype}}s :<a href="#" ng-click="render({content_type:'city',data:content.data._parent})">{{content.data.location}}</a></h1>
+ 
 <span>Total size : {{content.data.amount}}</span>
 <ul class = "pops">Economical data:
 <li>Income: {{content.data.economy.income}}</li>
