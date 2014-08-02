@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="letsrule-editor">
+<head>
+  <script src="/js/leaflet.js"></script>
+  <script src="/js/leaflet.draw.js"></script>
+  <script src="/js/angular.min.js"></script>
+  <script src="/js/angular-leaflet-directive.min.js"></script>
+  <script type="text/javascript" src="/components/editor/FileSaver.js"></script>
+  <script type="text/javascript" src="/components/editor/editor.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/leaflet.css">
+    <link rel="stylesheet" type="text/css" href="/css/leaflet.draw.css">
+  
+</head>
+<body ng-controller="editorCtrl">
+  <ul>
+    <li ng-repeat="country in data.countries">
+      <a href='' ng-click="render({content_type:'country', data:country})">{{country.name}}</a>
+    </li>
+  </ul>
+  <div ng-switch on = "rendering.content_type">
+      <div ng-switch-when="pop">
+        
+      </div>
+      <div ng-switch-when="city">
+        <input ng-model = "rendering.data.name"></input>
+        <ul> POPS:
+          
+        </ul>
+      </div>
+      <div ng-switch-when="region">
+        <input ng-model = "rendering.data.name"></input>
+        <ul> Cities:
+          <li ng-repeat="city in rendering.data.cities">
+            <a href='' ng-click="render({content_type:'city', data:city})">{{city.name}}</a>
+          </li>
+        </ul>
+
+        <leaflet center="map.center" json= "rendering.data.geo" style = "width:400px;height:400px;" controls="map.controls"></leaflet>
+      </div>
+      <div ng-switch-when="company">
+        
+      </div>
+      <div ng-switch-when="country">
+        <input ng-model = "rendering.data.name"></input>
+        <ul> Regions:
+          <li ng-repeat="region in rendering.data.regions">
+            <a href='' ng-click="render({content_type:'region', data:region})">{{region.name}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  <button ng-click="save()">Save database</button>
+</body>
