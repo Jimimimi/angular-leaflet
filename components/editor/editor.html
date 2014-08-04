@@ -61,18 +61,26 @@
           
         </div>
         <div ng-switch-when="product">
+          <div class="col-md-4">
           <h1 contentEditable="true" ng-model = "rendering.data.name" title="Click to edit"></h1>
-          <span class="label label-info">Category</span> {{rendering.data.category}}
-
-          <ul> Needs:
-            <li ng-repeat="need in rendering.data.needs">
-              <a href="" ng-click="render({content_type:'product', data: menu.productContent(need)})">{{need}}</a>
-            </li>
-          </ul>
-          <ul> Needed by:
-            <li ng-repeat="user in menu.getUsedBy(rendering.data.name)">
-              <a href="" ng-click="render({content_type:'product', data: user})">{{user.name}}</a>
-            </li>
+          <span class="label label-success">{{rendering.data.category}}</span> 
+          </div>
+          <div class="col-md-4">
+            <div class="well well-lg">
+              <span class="label label-info">Needs</span>
+              <div class="list-group">
+                <a class= "list-group-item" href="" ng-repeat="need in rendering.data.needs" ng-click="render({content_type:'product', data: menu.productContent(need)})">{{need}}</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4" ng-hide="menu.getUsedBy(rendering.data.name).length == 0">
+            <div class="well well-lg">
+              <span class="label label-danger">Needed by</span>
+              <div class="list-group">
+                <a class= "list-group-item" href="" ng-repeat="user in menu.getUsedBy(rendering.data.name)" ng-click="render({content_type:'product', data: user})">{{user.name}}</a>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div ng-switch-when="city">
@@ -112,7 +120,7 @@
               <div class="col-md-4">
               <div class="well well-lg">
               <span class="label label-info">City location</span>
-                <leaflet center="map.center" style = "width:400px;height:400px;" controls="map.controls"></leaflet>
+                <leaflet center="map.center" style = "width:100%;height:400px;" controls="map.controls"></leaflet>
               </div>
             </div>
           </div>
@@ -155,7 +163,7 @@
               <div class="col-md-4">
               <div class="well well-lg">
               <span class="label label-info">Region geometry</span>
-                <leaflet center="map.center" style = "width:400px;height:400px;" controls="map.controls"></leaflet>
+                <leaflet center="map.center" style = "width:100%;height:400px;" controls="map.controls"></leaflet>
               </div>
           </div>
           </div>

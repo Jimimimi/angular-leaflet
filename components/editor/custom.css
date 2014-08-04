@@ -30,9 +30,9 @@ body {
 #page-inner {
     width:100%;
     margin:10px 20px 10px 0px;
-    background-color:#fff!important;
+      background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 300px) repeat-x, url('grey-noise.png') repeat;
     padding:10px;
-    min-height:1200px;
+    min-height:768px;
 }
 
 .text-center {
@@ -284,6 +284,7 @@ font-weight: 700;
 	background:#ff0000;
 	top:20px;
 }
+
 .nav-second-level > li > a:after,
 .nav-third-level > li > a:after,
 .nav-fourth-level > li > a:after {
@@ -310,6 +311,7 @@ font-weight: 700;
 .nav-fourth-level > li > a:before {
     left:60px;
 }
+
 .navbar-side {
 	border:none;
 	background-color: #202020;

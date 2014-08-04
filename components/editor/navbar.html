@@ -6,14 +6,10 @@
       <li ng-repeat="country in data.countries" id="{{country.name}}" >
         <a href="#" ng-click="render({content_type:'country', data:country})">{{country.name}}<span class="fa arrow"></span></a>
         <ul class="nav nav-third-level">
-          <li ng-repeat="region in country.regions">
-            <a href="#" ng-click="render({content_type:'region', data:region})">{{region.name}}<span class="fa arrow">&nbsp<span class="label label-success">Cities</span></span></a>
-            <ul class="nav nav-fourth-level">
-              <li ng-repeat="city in region.cities" repeat>
-              <a href="#" ng-click="render({content_type:'city', data: city})">{{city.name}}<span class="fa arrow"></span></a>
-              </li>
-            </ul>
-          </li>
+          <li><a href="#">Regions</a></li>
+          <li><a href="#">Companies</a></li>
+          <li><a href="#">Characters</a></li>
+          <li><a href="#">Political parties</a></li>
         </ul>
       </li>
     </ul>
@@ -26,7 +22,7 @@
       <li ng-repeat="category in menu.products">
         <a href="#">{{category.name}}<span class="badge badge-primary pull-right">{{category.products.length}}</a>
         <ul class="nav nav-third-level">
-          <li ng-repeat="product in category.products">
+          <li ng-repeat="product in category.products" repeat>
             <a href="#" ng-click="render({content_type: 'product', data: menu.productContent(product.name)})">{{product.name}}</a>
           </li>
         </ul>
