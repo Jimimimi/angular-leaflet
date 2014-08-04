@@ -76,10 +76,10 @@ div[class^='ui-'][class$='-right'] {
 }
 
 .ui-center {
-  top:25%;
-  left:25%;
-  width:50%;
-  height:50%;
+  top:15%;
+  left:33%;
+  width:30%;
+  height:70%;
 }
 /*.info {
   background: rgba(255, 255, 255, 0.9);
@@ -214,7 +214,7 @@ div[class^='ui-'][class$='-right'] {
   color: whitesmoke;
 }
 .windowWidget a, a:hover,a:active,a:visited {
-  color: goldenrod;
+  color: grey;
 }
 .menu {
    opacity: 0.5;
@@ -244,7 +244,7 @@ div[class^='ui-'][class$='-right'] {
 .btn-close {
   cursor: pointer;
   font-size: 1em;
-  color:whitesmoke;
+  color:grey;
 }
 
 /*Profile box*/
@@ -309,4 +309,81 @@ div[class^='ui-'][class$='-right'] {
   /* opacity: 1; */
   border: solid goldenrod;
   float: left;
+}
+
+.papers, .papers:before, .papers:after
+{
+  background-color: whitesmoke;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.1), 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.papers
+{
+  position: relative;
+  width: 100%;
+  height:100%;
+  padding: 2em;
+}
+
+.papers:before
+{
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 7px;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.papers:after
+{
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.tabs {
+  position: absolute;
+  right: -46px;
+}
+.tabs > a {
+  display: block;
+  text-decoration: none;
+  padding: 5px;
+  background: lightgray;
+  margin-bottom: 5px;
+  max-width: 100px;
+  position: relative;
+  left: 70px;
+  padding-right: 10px;
+  text-align: right;
+  font-family: verdana;
+  text-transform: capitalize;
+  font-size: 0.8pc;
+  font-weight: bold;
+  box-sizing: content-box;
+}
+
+.tabs > a.active {
+  margin-left: -15px;
+  background: whitesmoke;
+  border-right: solid goldenrod 5px;
+  color:black;
+  text-align: justify;
+}
+.tabs > a.active:after {
+  content: "";
+  position: absolute;
+  background: blue;
+  height: 10px;
+  width: 10px;
+  right: 5px;
+  top: 8px;
+  border-radius: 10px;
+  box-shadow: 0 0 3px 2px goldenrod;
 }
