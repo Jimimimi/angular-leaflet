@@ -14,6 +14,7 @@
   <script src="components/ui/ui-devlog.js"></script>
   <script src="components/ui/ui-window.js"></script>
   <script src="components/ui/ui-menu.js"></script>
+  <script src="components/ui/ui-profile.js"></script>
   <script src="components/product/product.js"></script>
   <script src="components/pop/pops.js"></script>
   <script src="components/city/city.js"></script>
@@ -30,22 +31,7 @@
   
   <ui-plane ng-controller = "eventHandler" ng-keypress="hotKeys($event)">
     <div class="ui-top-left">
-      <!-- <h1>Map bounds example</h1>
-      <h2>South west</h2>
-      <form>
-          Lat : <input type="number" step="any" ng-model="bounds.southWest.lat" />
-          Lng : <input type="number" step="any" ng-model="bounds.southWest.lng" />
-      </form>
-
-      <h2>North east</h2>
-      <form>
-          Lat : <input type="number" step="any" ng-model="bounds.northEast.lat" />
-          Lng : <input type="number" step="any" ng-model="bounds.northEast.lng" />
-      </form>
-      <h2>Center</h2>
-      <form>
-        Lat : <input type="number" step="any" ng-model="center.lat" />
-          Lng : <input type="number" step="any" ng-model="center.lng" /> -->
+      <ui-profile></ui-profile>
     </div>
     <div class="ui-top-right">
       <time-control></time-control>
