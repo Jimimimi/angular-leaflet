@@ -1,0 +1,76 @@
+<ul class="nav" id="main-menu">
+  <li>
+    <a class="" href="#"><i class="fa fa-globe fa-3x"></i> Countries<span class="badge badge-primary pull-right">{{data.countries.length}}</span> </a>
+    <ul class="nav nav-second-level">
+      <li><a href="#" ><button class="btn btn-success btn-xs" ng-click="create('country')"><i class="fa fa-plus"></i> New country</button></a></li>
+      <li ng-repeat="country in data.countries" id="{{country.name}}" >
+        <a href="#" ng-click="render({content_type:'country', data:country})">{{country.name}}<span class="fa arrow"></span></a>
+        <ul class="nav nav-third-level">
+          <li ng-repeat="region in country.regions">
+            <a href="#" ng-click="render({content_type:'region', data:region})">{{region.name}}<span class="fa arrow">&nbsp<span class="label label-success">Cities</span></span></a>
+            <ul class="nav nav-fourth-level">
+              <li ng-repeat="city in region.cities" repeat>
+              <a href="#" ng-click="render({content_type:'city', data: city})">{{city.name}}<span class="fa arrow"></span></a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>  
+  
+  <li>
+    <a href=""><i class="fa fa-cube fa-3x"></i> Products<span class="badge badge-primary pull-right">{{data.products.length}}</span></a>
+    <ul class="nav nav-second-level">
+      <li><a href="#" ><button class="btn btn-success btn-xs" ng-click="create('product')"><i class="fa fa-plus"></i> New product</button></a></li>
+      <li ng-repeat="category in menu.products">
+        <a href="#">{{category.name}}<span class="badge badge-primary pull-right">{{category.products.length}}</a>
+        <ul class="nav nav-third-level">
+          <li ng-repeat="product in category.products">
+            <a href="#" ng-click="render({content_type: 'product', data: menu.productContent(product.name)})">{{product.name}}</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+
+  <li>
+  <a href=""><i class="fa fa-users fa-3x"></i> POP types<span class="badge badge-primary pull-right">{{data.poptypes.length}}</span></a>
+  <ul class="nav nav-second-level">
+      <li><a href="#" ><button class="btn btn-success btn-xs" ng-click="create('poptype')"><i class="fa fa-plus"></i> New POP type</button></a></li>
+      <li ng-repeat="poptype in data.poptypes">
+        <a href="#" ng-click="render({content_type: 'poptype', data: poptype})">{{poptype.name}}</a>
+      </li>
+    </ul>
+  </li> 
+
+  <li>
+    <a href=""><i class="fa fa-arrows fa-3x"></i> Ideologies<span class="badge badge-primary pull-right">{{data.ideologies.length}}</span></a>
+    <ul class="nav nav-second-level">
+      <li><a href="#" ><button class="btn btn-success btn-xs" ng-click="create('ideology')"><i class="fa fa-plus"></i> New ideology</button></a></li>
+      <li ng-repeat="ideology in data.ideologies">
+        <a href="#" ng-click="render({content_type: 'ideology', data: ideology})">{{ideology.name}}</a>
+      </li>
+    </ul>
+  </li> 
+
+  <li>
+    <a href=""><i class="fa fa-cloud fa-3x"></i> Religions<span class="badge badge-primary pull-right">{{data.religions.length}}</span></a>
+    <ul class="nav nav-second-level">
+      <li><a href="#" ><button class="btn btn-success btn-xs" ng-click="create('religions')"><i class="fa fa-plus"></i> New religion</button></a></li>
+      <li ng-repeat="religion in data.religions">
+        <a href="#" ng-click="render({content_type: 'religion', data: religion})">{{religion.name}}</a>
+      </li>
+    </ul>
+  </li> 
+  
+  <li>
+    <a href=""><i class="fa fa-university fa-3x"></i> Political systems<span class="badge badge-primary pull-right">{{data.systems.length}}</span></a>
+    <ul class="nav nav-second-level">
+      <li><a href="#" ><button class="btn btn-success btn-xs" ng-click="create('system')"><i class="fa fa-plus"></i> New political system</button></a></li>
+      <li ng-repeat="system in data.systems">
+        <a href="#" ng-click="render({content_type: 'ideology', data: ideology})">{{system.name}}</a>
+      </li>
+    </ul>
+  </li> 
+</ul>

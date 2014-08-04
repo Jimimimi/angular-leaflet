@@ -1,53 +1,281 @@
 <!DOCTYPE html>
 <html ng-app="letsrule-editor">
 <head>
-  <script src="/js/leaflet.js"></script>
-  <script src="/js/leaflet.draw.js"></script>
-  <script src="/js/angular.min.js"></script>
-  <script src="/js/angular-leaflet-directive.min.js"></script>
-  <script type="text/javascript" src="/components/editor/FileSaver.js"></script>
-  <script type="text/javascript" src="/components/editor/editor.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/leaflet.css">
-    <link rel="stylesheet" type="text/css" href="/css/leaflet.draw.css">
+
+
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> -->
+<link rel="stylesheet" type="text/css" href="/css/font-awesome-4.1.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="/css/leaflet.css">
+<link rel="stylesheet" type="text/css" href="/css/leaflet.draw.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap.metismenu/1.1.0/css/metismenu.min.css">
+<link rel="stylesheet" type="text/css" href="custom.css">
   
 </head>
 <body ng-controller="editorCtrl">
-  <ul>
-    <li ng-repeat="country in data.countries">
-      <a href='' ng-click="render({content_type:'country', data:country})">{{country.name}}</a>
-    </li>
-  </ul>
-  <div ng-switch on = "rendering.content_type">
-      <div ng-switch-when="pop">
-        
+  <div id="wrapper">
+    <!-- Top navbar -->
+    <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="editor.html">Teh editorz</a> 
       </div>
-      <div ng-switch-when="city">
-        <input ng-model = "rendering.data.name"></input>
-        <ul> POPS:
-          
-        </ul>
+      <div style="color: red;
+      padding: 15px 50px 5px 50px;
+      font-weight: bolder;
+      float: right;
+      font-size: 16px;"> 
+        Changes made: 0 &nbsp; <a href="#" class="btn btn-danger square-btn-adjust" ng-click="save()">Save data</a> 
       </div>
-      <div ng-switch-when="region">
-        <input ng-model = "rendering.data.name"></input>
-        <ul> Cities:
-          <li ng-repeat="city in rendering.data.cities">
-            <a href='' ng-click="render({content_type:'city', data:city})">{{city.name}}</a>
-          </li>
-        </ul>
+    </nav>
+    <!-- ./Top navbar -->
 
-        <leaflet center="map.center" json= "rendering.data.geo" style = "width:400px;height:400px;" controls="map.controls"></leaflet>
+    <!-- Sidebar -->
+    <nav class="navbar-default navbar-side" role="navigation">
+      <div class="sidebar-collapse">
+        <my-menu>
+
+        </my-menu>
+
       </div>
-      <div ng-switch-when="company">
-        
-      </div>
-      <div ng-switch-when="country">
-        <input ng-model = "rendering.data.name"></input>
-        <ul> Regions:
-          <li ng-repeat="region in rendering.data.regions">
-            <a href='' ng-click="render({content_type:'region', data:region})">{{region.name}}</a>
-          </li>
-        </ul>
+
+    </nav>
+  <ul>
+
+  </ul>
+
+   <!-- Render Content  -->
+  <div id="page-wrapper" >
+    <div id="page-inner">
+      <div ng-switch on = "rendering.content_type">
+        <div ng-switch-when="home">
+          <h1>Please select an item from the sidebar</h1>
+          <input type="file">
+        </div>
+        <div ng-switch-when="pop">
+          
+        </div>
+        <div ng-switch-when="product">
+          <h1 contentEditable="true" ng-model = "rendering.data.name" title="Click to edit"></h1>
+          <span class="label label-info">Category</span> {{rendering.data.category}}
+
+          <ul> Needs:
+            <li ng-repeat="need in rendering.data.needs">
+              <a href="" ng-click="render({content_type:'product', data: menu.productContent(need)})">{{need}}</a>
+            </li>
+          </ul>
+          <ul> Needed by:
+            <li ng-repeat="user in menu.getUsedBy(rendering.data.name)">
+              <a href="" ng-click="render({content_type:'product', data: user})">{{user.name}}</a>
+            </li>
+        </div>
+
+        <div ng-switch-when="city">
+          <div class="col-md-12">
+
+            <div class="panel-heading">
+              <h1 contentEditable="true" ng-model = "rendering.data.name" title="Click to edit"></h1>
+            </div>
+
+              <div class="col-md-4">
+                <div class="well well-lg">
+                <span class="label label-info pull-right">Description</span>
+                  <p contentEditable="true" ng-model= "rendering.data.description">Click to edit the description.</p>
+                </div>
+                <hr>
+                <div class="well well-lg">
+                <span class="label label-info pull-right">General information</span>
+                <p><span class="label label-success">Population:</span> 500000</p>
+                </div>
+              </div>
+              <div class = "col-md-3 col-md-offset-1">
+              
+                <div class="well well-lg">
+                  <div class="row">
+                    <button class= "btn btn-success btn-xs pull-right"><i class="fa fa-plus"></i> Add a new population group</button>
+                  </div>
+                  <div class="row">
+                  <span class="label label-info">Population groups</span>
+                    <div class="list-group"> 
+                      <a class="list-group-item" ng-repeat="pop in rendering.data.pops" href='' ng-click="render({content_type:'pop', data: pop})">
+                        {{pop.amount | number }} {{pop.poptype}}s
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+              <div class="well well-lg">
+              <span class="label label-info">City location</span>
+                <leaflet center="map.center" style = "width:400px;height:400px;" controls="map.controls"></leaflet>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div ng-switch-when="region">
+          <div class="col-md-12">
+
+            <div class="panel-heading">
+              <h1 contentEditable="true" ng-model = "rendering.data.name" title="Click to edit"></h1>
+            </div>
+
+              <div class="col-md-4">
+                <div class="well well-lg">
+                <span class="label label-info pull-right">Description</span>
+                  <p contentEditable="true" ng-model= "rendering.data.description">Click to edit the description.</p>
+                </div>
+                <hr>
+                <div class="well well-lg">
+                <span class="label label-info pull-right">General information</span>
+                <p><span class="label label-success">Population:</span> 500000</p>
+                </div>
+              </div>
+              <div class = "col-md-3 col-md-offset-1">
+              
+              <div class="well well-lg">
+                <div class="row">
+                  <button class= "btn btn-success btn-xs pull-right"><i class="fa fa-plus"></i> Add a new city</button>
+                </div>
+                <div class="row">
+                <span class="label label-info">Cities</span>
+                <div class="list-group"> 
+                  <a class="list-group-item" ng-repeat="city in rendering.data.cities" href='' ng-click="render({content_type:'city', data:city})">
+                    {{city.name}}
+                  </a>
+                </div>
+                </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+              <div class="well well-lg">
+              <span class="label label-info">Region geometry</span>
+                <leaflet center="map.center" style = "width:400px;height:400px;" controls="map.controls"></leaflet>
+              </div>
+          </div>
+          </div>
+          
+        </div>
+
+        <div ng-switch-when="company">
+
+          
+        </div>
+
+        <div ng-switch-when="country">
+        <div class="col-md-6">
+        <h1 contentEditable="true" ng-model = "rendering.data.name" title="Click to edit"></h1>
+          <ul class="nav nav-tabs">
+              <li class="active"><a href="#home" data-toggle="tab">General info</a>
+              </li>
+              <li class=""><a href="#regions" data-toggle="tab">Regions</a>
+              </li>
+              <li class=""><a href="#parties" data-toggle="tab">Political parties</a>
+              </li>
+              <li class=""><a href="#settings" data-toggle="tab">Settings</a>
+              </li>
+
+          </ul>
+
+          <div class="tab-content">
+              <div class="tab-pane fade active in" id="home">
+                  <h4>General information</h4>
+                  <div class="well well-lg">
+                    <span class="label label-info pull-right">Description</span>
+                    <p contentEditable="true" ng-model= "rendering.data.description">Click to edit the description.</p>
+                  </div>
+              </div>
+              <div class="tab-pane fade" id="regions">
+                  <h4>Regions</h4>
+                  <div class="well well-lg">
+                    <div class="row">
+                      <button class= "btn btn-success btn-xs pull-right"><i class="fa fa-plus"></i> Add a new region</button>
+                    </div>
+                    <div class="row">
+                      <span class="label label-info">Regions</span>
+                      <div class="list-group"> 
+                        <a class="list-group-item" ng-repeat="region in rendering.data.regions" href='' ng-click="render({content_type:'region', data:region})">
+                        {{region.name}}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="tab-pane fade" id="parties">
+                  <h4>Political parties</h4>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              </div>
+              <div class="tab-pane fade" id="settings">
+                  <h4>Settings Tab</h4>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              </div>
+          </div>
+          </div>
+
+
+
+
+<!--         <div class="col-md-8">
+
+            <div class="panel-heading">
+              <h1 contentEditable="true" ng-model = "rendering.data.name" title="Click to edit"></h1>
+            </div>
+
+              <div class="col-md-6">
+                <div class="well well-lg">
+                <span class="label label-info pull-right">Description</span>
+                  <p contentEditable="true" ng-model= "rendering.data.description">Click to edit the description.</p>
+                </div>
+                <hr>
+                <div class="well well-lg">
+                <span class="label label-info pull-right">General information</span>
+                <p><span class="label label-success">Population:</span> 500000</p>
+                </div>
+              </div>
+              <div class = "col-md-5 col-md-offset-1">
+              
+              <div class="well well-lg">
+                <div class="row">
+                  <button class= "btn btn-success btn-xs pull-right"><i class="fa fa-plus"></i> Add a new region</button>
+                </div>
+                <div class="row">
+                <span class="label label-info">Regions</span>
+                <div class="list-group"> 
+                  <a class="list-group-item" ng-repeat="region in rendering.data.regions" href='' ng-click="render({content_type:'region', data:region})">
+                    {{region.name}}
+                  </a>
+                </div>
+                </div>
+                </div>
+              </div>
+
+
+        </div> -->
+          
+        </div>
+
       </div>
     </div>
-  <button ng-click="save()">Save database</button>
+  </div>
+
+  <!-- ./Render Content  -->
+
+<!--   <button ng-click="save()">Save database</button> -->
+
+  </div>
+<script src="/js/leaflet.js"></script>
+<script src="/js/leaflet.draw.js"></script>
+<script src="/js/angular.min.js"></script>
+<script src="/js/angular-leaflet-directive.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//cdn.jsdelivr.net/bootstrap.metismenu/1.1.0/js/metismenu.min.js"></script>
+<script type="text/javascript" src="/components/editor/FileSaver.js"></script>
+<script type="text/javascript" src="/components/editor/geojson-flatten.js"></script>
+<script type="text/javascript" src="/components/editor/editor.js"></script>
 </body>

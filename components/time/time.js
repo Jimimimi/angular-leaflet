@@ -31,7 +31,7 @@ var module = angular.module('TimeSvc',[])
       this.day = 1;
       this.month = 1;
       this.monthEnd = 31;
-      this.year = 2011;
+      this.year = 2015;
       this.events = {
         'year':[],
         'month':[],
