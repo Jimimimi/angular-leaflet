@@ -1,3 +1,8 @@
+<div class="tabs" ng-init="active = 1">
+  <a href="#" ng-click = "active = 1" ng-class="{active:active == 1}">General information</a>
+  <a href="#" ng-click = "active = 2" ng-class="{active:active == 2}">Population data</a>
+  <a href="#" ng-click = "active = 3" ng-class="{active:active == 3}">Economy</a>
+</div>
 <h1>{{content.data.name}}</h1>
 <span>Population: {{content.data.getPopulation()}}</span>
 <ul class = "pops">Notable population groups:

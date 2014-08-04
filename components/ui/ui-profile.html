@@ -1,0 +1,10 @@
+<div class="profile">
+  <div class="avatar"></div>
+  <div class="info">
+    <span class="player-name">{{player.name}}</span>
+    <span class="player-country">{{player.country}}</span>
+  </div>
+  <div class="modifiers">
+    <i ng-repeat="modifier in player.modifiers.active" class="fa {{modifier.name}}" title = "{{modifier.name}}"></i>
+  </div>
+</div>

@@ -7,7 +7,8 @@
       cities:[],
       regions:[],
       countries:[],
-      companies:[]
+      companies:[],
+      products: []
     });
 
   });
@@ -65,6 +66,20 @@
       };
       this.geo = data.geo;
       var self = this;
+      this.growth = {
+        amount: 0,
+        factors: function(){
+          var factors = {
+            immigration: country.get('immigration'),
+            popGrowth: country.get('popGrowth'),
+            avgWage: self.get('avgWage')
+          };
+          
+        },
+        effects: function(){
+          housing: 0 //formula to calculate housing shortage
+        }
+      };
       var getPops = function(){
         var arr = [];
         for (var i in data.pops){
@@ -169,5 +184,13 @@
 
     return Country;
   }])
+
+  module.factory('Modifier', [
+    function(){
+      var self = this;
+      angular.extend(self, {
+
+      })
+    }])
 
 })();
