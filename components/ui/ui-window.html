@@ -1,9 +1,20 @@
 <div class = "ui-center" ng-show="isOpen">
 <div class = "papers">
-
+  <div class="letterhead">
+    <div class="crest"></div>  
+    <h5>Republic of Hellas</h5>
+    <h6>Ministry of Information</h6>
+  </div>
   <i class = "btn-close fa fa-times" style="float:right;" ng-click="closeWindow()"></i>
-  
-    <div ng-switch on = "content.content_type">
+  <h6 style="
+    margin: 0;
+    opacity: 0.5;
+    float: right;
+    margin-right: 20px;
+    font-family: monospace;
+    text-decoration: underline;
+">REPORT - CLASSIFIED</h6>
+    <div ng-switch on = "content.content_type" class="papers-content">
       <pop-info ng-switch-when="pop"></pop-info>
       <city-info ng-switch-when="city"></city-info>
       <region-info ng-switch-when="region"></region-info>
