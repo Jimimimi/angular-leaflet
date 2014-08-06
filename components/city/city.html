@@ -3,10 +3,18 @@
   <a href="#" ng-click = "active = 2" ng-class="{active:active == 2}">Population data</a>
   <a href="#" ng-click = "active = 3" ng-class="{active:active == 3}">Economy</a>
 </div>
-<h1>{{content.data.name}}</h1>
-<span>Population: {{content.data.getPopulation()}}</span>
-<ul class = "pops">Notable population groups:
-<li ng-repeat="pop in content.data.POPS">
-  {{pop.amount}} <a href="#" ng-click="render({content_type:'pop',data:pop})">{{pop.poptype}}s</a>
-</li>
-</ul>
+<div ng-switch on= "active">
+  <h1>{{content.data.name}}</h1>
+  <div ng-switch-when="1">
+    <h3>Description</h3>
+    <p>This is a detailed description of the city</p>
+  </div>
+  <div ng-switch-when="2">
+    <span>Population: {{content.data.getPopulation()}}</span>
+    <ul class = "pops">Notable population groups:
+    <li ng-repeat="pop in content.data.POPS">
+      {{pop.amount}} <a href="#" ng-click="render({content_type:'pop',data:pop})">{{pop.poptype}}s</a>
+    </li>
+    </ul>
+  </div>
+</div>

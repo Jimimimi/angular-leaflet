@@ -324,6 +324,7 @@ div[class^='ui-'][class$='-right'] {
   width: 100%;
   height:100%;
   padding: 2em;
+  font-family: monospace;
 }
 
 .papers:before
@@ -347,6 +348,16 @@ div[class^='ui-'][class$='-right'] {
   height: 100%;
   z-index: -1;
 }
+.papers h1 {
+  text-align: center;
+}
+.papers > h6 {
+  margin: 0;
+  opacity: 0.5;
+  float: right;
+  margin-right: 20px;
+  text-decoration: underline;
+}
 .papers-content {
   margin-top: 70px;
 
@@ -359,14 +370,14 @@ div[class^='ui-'][class$='-right'] {
   display: block;
   text-decoration: none;
   padding: 5px;
-/*  background: lightgray;
-*/  margin-bottom: 5px;
+  color: white;
+  text-shadow: 0 0 4px black;
+  margin-bottom: 5px;
   max-width: 100px;
   position: relative;
   left: 70px;
   padding-right: 10px;
   text-align: right;
-  font-family: verdana;
   text-transform: capitalize;
   font-size: 0.8pc;
   font-weight: bold;
@@ -394,10 +405,10 @@ div[class^='ui-'][class$='-right'] {
 }
 .tabs > a.active {
   margin-left: -15px;
-/*  background: rgb(47, 231, 54);*/
   border-left: solid 10px grey;
   color: black;
   box-shadow: 0 0 5px grey inset;
+  text-shadow: none;
 
 }
 .tabs > a.active:after {
@@ -416,8 +427,8 @@ div[class^='ui-'][class$='-right'] {
   display: inline-block;
   font-family: sans-serif;
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 20px;
+  left: 15px;
 }
 .letterhead > h5, .letterhead > h6 {
   margin: 0;
