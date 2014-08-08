@@ -15,16 +15,23 @@ angular.module('ui-devlog',[])
           
         }
       }
-      
+      var descriptions = {
+        help: 'Returns the description of a command. --usage: help -command-',
+        clear: 'Clears the console',
+        test: 'A test function. --usage: test <param1> <param2> '
+      }
       var devFunctions = {
         help: function(command) {
-          if (command){return devFunctions[command].descr}
+          if (command){log.addEvent(descriptions[command])}
             else {return internal.list()};
         },
         clear: function(){
           while (log.events.length > 0){
             log.events.pop(0);
           };
+        },
+        test: function(param1,param2,param3){
+          console.log(param1, param2, param3)
         }
         
       }
@@ -37,8 +44,14 @@ angular.module('ui-devlog',[])
       };
       
       this.exec = function(input){
-        if (devFunctions.hasOwnProperty(input)) {
-          devFunctions[input]();   
+        var list = input.split(' ');
+        if (devFunctions.hasOwnProperty(list[0])) {
+          if (list.length > 1) {
+            devFunctions[list.shift()].apply(this,list);
+          } else {
+            devFunctions[list[0]]();  
+          }
+          
         } else {
             log.addEvent('*** Error: command not found');
             log.addEvent('- try using the "help" command')
