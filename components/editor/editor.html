@@ -51,7 +51,7 @@
 
    <!-- Render Content  -->
   <div id="page-wrapper" >
-    <div id="page-inner">
+    <div id="page-inner" class="container">
       <div ng-switch on = "rendering.content_type">
         <div ng-switch-when="home">
           <h1>Please select an item from the sidebar</h1>
@@ -59,6 +59,17 @@
         </div>
         <div ng-switch-when="pop">
           
+        </div>
+        <div ng-switch-when="poptype">
+          <h1 contentEditable="true" ng-model = "rendering.data.name" title="Click to edit"></h1>
+           <div class="col-md-4">
+            <div class="well well-lg">
+              <span class="label label-info">Needs</span>
+              <div class="list-group">
+                <a class= "list-group-item" href="" ng-repeat="need in rendering.data.needs" ng-click="render({content_type:'product', data: menu.productContent(need)})">{{need}}</a>
+              </div>
+            </div>
+          </div>
         </div>
         <div ng-switch-when="product">
           <div class="col-md-4">
