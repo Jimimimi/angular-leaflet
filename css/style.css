@@ -350,6 +350,7 @@ div[class^='ui-'][class$='-right'] {
 }
 .papers h1 {
   text-align: center;
+  padding-top: 40px;
 }
 .papers > h6 {
   margin: 0;

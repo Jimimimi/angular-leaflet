@@ -11,6 +11,7 @@ angular.module('letsrule-engine',
   'leaflet-directive',
   'pop-module',
   'city-module',
+  'models-company'
   ]
 )
 .service('engine', 
@@ -21,8 +22,9 @@ angular.module('letsrule-engine',
   'Pool',
   'windowManager',
   '$rootScope',
+  'Company',
 
-  function($log,Country,leafletData,$Pool, $manager,$rootScope){
+  function($log,Country,leafletData,$Pool, $manager,$rootScope, Company){
   var engine = this;
   engine.windowManager = $manager;
   engine.ui = {
@@ -37,7 +39,7 @@ angular.module('letsrule-engine',
   
     window.engine = engine;
     engine.db = db;
-    $log.addEvent('Game engine loaded')
+    $log.addEvent('Game engine loaded');
     engine.country = new Country(db.countries[0]);
     
     // ========== cities -- should move to Map.js
@@ -80,7 +82,7 @@ angular.module('letsrule-engine',
           city.POPS.forEach(function(pop){
             pop.grow();
           })
-        })
+        });
         if (city.getPopulation() < 1000) {
           city.options = {icon: cityIcons.small};
         }
@@ -90,11 +92,11 @@ angular.module('letsrule-engine',
 
         cityLayer.addLayer(L.marker(city.geo,{name:city.name, icon: city.options.icon}));
       })
-    })
+    });
 
     cityLayer.eachLayer(function(layer){
       layer.on('click', function(event){
-        var city = engine.search.cities(event.target.options.name)
+        var city = engine.search.cities(event.target.options.name);
         $log.addEvent('clicked on ' + city.name);
         $manager.setContent({
           content_type: 'city',
@@ -102,7 +104,7 @@ angular.module('letsrule-engine',
         });
         $manager.open();
       })
-    })
+    });
     leafletData.getMap().then(function (map) {
       cityLayer.addTo(map);
     });

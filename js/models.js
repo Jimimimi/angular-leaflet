@@ -8,13 +8,14 @@
       regions:[],
       countries:[],
       companies:[],
-      products: []
+      products: [],
+      produnits: []
     });
 
   });
   module.factory('POP', function(Pool){
     function POP(data,parent){
-      this.id = Pool.POPS.length
+      this.id = Pool.POPS.length;
       this._parent = parent;
       this.poptype = data.poptype;
       this.amount = data.amount;
@@ -139,10 +140,14 @@
     return Region;
   });
 
-  module.factory('Market', function(){
+  module.factory('Market', function(Company){
     return function Market(){
       this.companies = [];
       this.products = {};
+      this.addCompany = function(data) {
+        var company = new Company(data, this);
+        this.companies.push(company.id)
+      }
     };
   });
 
