@@ -134,12 +134,110 @@
           "population": 5000,
           "growth": 0
         }
+      ],
+      "companies": [
+        {
+          "name": "State",
+          "location": "Athens",
+          "produnits": [
+            {
+              "produce": "Electricity",
+              "mode": "factory"
+            },
+            {
+              "produce": "Water",
+              "mode": "factory"
+            },
+            {
+              "produce": "Steel",
+              "mode": "factory"
+            },
+            {
+              "produce": "Iron",
+              "mode": "mine"
+            },
+            {
+              "produce": "Coal",
+              "mode": "mine"
+            }
+
+          ]
+        }
       ]
     },
     {
       "name": "Albania",
       "capital": "Tirana",
       "regions": []
+    }
+  ],
+  "products": [
+    {
+      "name":"Coffee",
+      "category": "Agriculture",
+      "needs" : [
+        {
+          "name" : "Water",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "name": "Water",
+      "category": "Natural Resource",
+      "needs": []
+    },
+    {
+      "name": "Iron",
+      "category": "Natural Resource",
+      "needs": [
+        {
+          "name" : "Water",
+          "amount": 1
+        },
+        {
+          "name" : "Electricity",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "name": "Coal",
+      "category": "Natural Resource",
+      "needs": [
+        {
+          "name" : "Water",
+          "amount": 1
+        },
+        {
+          "name" : "Electricity",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "name": "Electricity",
+      "category": "Energy",
+      "needs": [
+        {
+          "name" : "Coal",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "name": "Steel",
+      "category": "Industry",
+      "needs": [
+        {
+          "name" : "Iron",
+          "amount": 1
+        },
+        {
+          "name" : "Electricity",
+          "amount": 1
+        }
+      ]
     }
   ]
 }

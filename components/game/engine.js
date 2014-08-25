@@ -7,11 +7,13 @@ angular.module('letsrule-engine',
   'ui-window',
   'ui-menu',
   'ui-profile',
+  'modules.pool',
   'letsrule-models',
   'leaflet-directive',
   'pop-module',
   'city-module',
-  'models-company'
+  'models-company',
+  'product-model'
   ]
 )
 .service('engine', 
@@ -23,8 +25,9 @@ angular.module('letsrule-engine',
   'windowManager',
   '$rootScope',
   'Company',
+  'Product',
 
-  function($log,Country,leafletData,$Pool, $manager,$rootScope, Company){
+  function($log,Country,leafletData,$Pool, $manager,$rootScope, Company, Product){
   var engine = this;
   engine.windowManager = $manager;
   engine.ui = {
@@ -35,12 +38,19 @@ angular.module('letsrule-engine',
       $manager.setContent(data);
     }
   };
+  function loadProducts(db){
+    for (var i=0;i<db.products.length;i++){
+      new Product(db.products[i])
+    }
+  }
   engine.loadDb = function(db){
   
     window.engine = engine;
     engine.db = db;
     $log.addEvent('Game engine loaded');
+    loadProducts(db);
     engine.country = new Country(db.countries[0]);
+
     
     // ========== cities -- should move to Map.js
 

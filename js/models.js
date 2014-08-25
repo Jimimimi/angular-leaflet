@@ -1,21 +1,21 @@
 (function(){
-  var module = angular.module('letsrule-models',['ui-devlog']);
+  var module = angular.module('letsrule-models',['ui-devlog', 'modules.pool']);
   
-  module.service('Pool', function(){
-    angular.extend(this, {
-      POPS:[],
-      cities:[],
-      regions:[],
-      countries:[],
-      companies:[],
-      products: [],
-      produnits: []
-    });
-
-  });
+//  module.service('Pool', function(){
+//    angular.extend(this, {
+//      POPS:[],
+//      cities:[],
+//      regions:[],
+//      countries:[],
+//      companies:[],
+//      products: [],
+//      produnits: []
+//    });
+//
+//  });
   module.factory('POP', function(Pool){
     function POP(data,parent){
-      this.id = Pool.POPS.length;
+      this.id = Pool.POPS.getLength();
       this._parent = parent;
       this.poptype = data.poptype;
       this.amount = data.amount;
@@ -49,7 +49,7 @@
         }
       };
 
-      Pool.POPS.push(this);
+      Pool.POPS.add(this);
     }
 
     return POP;
@@ -57,7 +57,7 @@
 
   module.factory('City', function(POP,Pool){
     function City(data,parent){
-      this.id = Pool.cities.length;
+      this.id = Pool.cities.getLength();
       this.name = data.name;
       this.economy = {
         "GDP": 0,
@@ -98,7 +98,7 @@
         })
         return amount;
       }
-      Pool.cities.push(this);
+      Pool.cities.add(this);
     }
 
     return City;
@@ -148,10 +148,11 @@
         var company = new Company(data, this);
         this.companies.push(company.id)
       }
+
     };
   });
 
-  module.factory('Country', ['devlog','Market','Region', function($log,Market, Region){
+  module.factory('Country', ['devlog','Market','Region','Product', function($log,Market, Region, Product){
     function Country(data){
       var self = this;
       function getRegions(){
@@ -171,6 +172,9 @@
       this.economy = {
         market: new Market()
       };
+      data.companies.forEach(function(company){
+        self.economy.market.addCompany(company);
+      })
       this.capital = data.capital;
       this.regions = getRegions();
       

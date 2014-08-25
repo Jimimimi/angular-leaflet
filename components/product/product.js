@@ -1,26 +1,19 @@
 (function(){
-  var module = angular.module('product-module', [])
-  .factory('Product', [
-    function(data){
-      angular.extend(this,{
+  var module = angular.module('product-model', [])
+  .factory('Product', ['Pool', function(Pool) {
+    function Product (data) {
+      angular.extend(this, {
         name: data.name,
         category: data.category,
         needs: data.needs,
-        getNeeds: function(){
+        recipe: data.recipe,
+        getNeeds: function () {
           return this.needs;
         }
       });
+      Pool.products.add(this);
+    };
 
-    }])
-  .directive('productInfo', [
-    function(){
-      return {
-        restrict: 'E',
-        scope: {},
-        controller: function(){
-          // to do
-        },
-        templateUrl: 'components/products/product.html'
-      }
-    }])
+    return Product;
+  }]);
 })()
