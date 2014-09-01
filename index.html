@@ -5,7 +5,6 @@
   <script src="js/angular.min.js"></script>
   <script src="js/angular-leaflet-directive.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-animate.min.js"></script>
-  
   <script src="js/app.js"></script>
   <script src="js/models.js"></script>
   
@@ -22,6 +21,8 @@
   <script src="components/map/GR.geo.json.js"></script>
   <script src="components/time/time.js"></script>
   <script src="components/db/db.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="js/vizi.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/font-awesome-4.1.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="css/leaflet.css">
   <link rel="stylesheet" type="text/css" href="css/angular-motion.min.css">
@@ -48,6 +49,7 @@
     <div class = "leaf" ng-controller="mapCtrl">
     <leaflet id="leaf" bounds="bounds" center="center" geojson="regions" maxbounds="maxbounds" defaults="defaults"> </leaflet>
     </div>
+    <div id = "vizi"></div>
 
   </ui-plane>
 

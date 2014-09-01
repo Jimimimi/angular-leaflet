@@ -70,6 +70,29 @@ angular.module('letsrule-engine',
           else {return {icon:cityIcons.large}}
         }
 
+      function toggleZoom(city){
+        var el = angular.element($('#leaf'));
+        if (el.hasClass('zoomin') && el.hasClass('zoomout')){
+          el.removeClass('zoomout').removeClass('zoomin').addClass('zoomin');
+        } else if (el.hasClass('zoomin')){
+          el.addClass('zoomout')
+        } else {
+          el.addClass('zoomin')
+        }
+
+//         var city3d = new VIZI.City();
+//         var vizi = document.getElementById('vizi');
+//         //angular.element(vizi).css({'display':'block'})
+//         city3d.init({
+//             coords: [-0.01924, 51.50358], // Canary Wharf
+//             domElement: vizi,
+//             overpassGridUpdate: true
+//             });
+// console.log(city);
+      }
+
+
+
     var cityLayer = L.layerGroup();
 
 
@@ -100,7 +123,9 @@ angular.module('letsrule-engine',
           content_type: 'city',
           data: city
         });
-        $manager.open();
+        toggleZoom(city);
+        // $manager.open();
+
       })
     })
     leafletData.getMap().then(function (map) {

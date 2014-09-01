@@ -2,19 +2,65 @@
   var module = angular.module('letsrule-models',['ui-devlog']);
   
   module.service('Pool', function(){
+    var list = function(){
+      var data = [] ;
+
+      return {
+        add: function(obj){
+          data.push(obj);
+        },
+        remove: function(obj){
+          var i = data.indexOf(obj);
+          if (i > -1){
+           res = data.splice(i, 1);
+           return res;
+         };
+        },
+        search: function(obj){
+
+          function filter(el){
+            for (var att in obj){
+              if (el.hasOwnProperty(att)) {
+                if (el[att] === obj[att]) {
+                  return true;
+                } else {
+                  return false;
+                }
+              }
+            }
+            return false;
+          }
+          
+          var res = [];
+          data.forEach(function(el){
+            if (filter(el)) {
+              res.push(el)
+            };
+          });
+          return res;  
+        },
+        getCount: function(){
+          return data.length;
+        }
+      }
+    };
+
+
     angular.extend(this, {
-      POPS:[],
-      cities:[],
-      regions:[],
-      countries:[],
-      companies:[],
-      products: []
+      POPS:new list(),
+      cities:new list(),
+      regions:new list(),
+      countries:new list(),
+      companies:new list(),
+      products: new list(),
+      produnits: new list(),
+      
     });
 
   });
   module.factory('POP', function(Pool){
     function POP(data,parent){
-      this.id = Pool.POPS.length
+      this.id = Pool.POPS.getCount()
       this._parent = parent;
       this.poptype = data.poptype;
       this.amount = data.amount;
@@ -48,7 +94,7 @@
         }
       };
 
-      Pool.POPS.push(this);
+      Pool.POPS.add(this);
     }
 
     return POP;
@@ -56,7 +102,7 @@
 
   module.factory('City', function(POP,Pool){
     function City(data,parent){
-      this.id = Pool.cities.length;
+      this.id = Pool.cities.getCount();
       this.name = data.name;
       this.economy = {
         "GDP": 0,
@@ -97,7 +143,7 @@
         })
         return amount;
       }
-      Pool.cities.push(this);
+      Pool.cities.add(this);
     }
 
     return City;
