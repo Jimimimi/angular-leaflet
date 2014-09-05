@@ -8,12 +8,14 @@ angular.module('letsrule-engine',
   'ui-menu',
   'ui-profile',
   'modules.pool',
-  'letsrule-models',
+  //'letsrule-models',
   'leaflet-directive',
   'pop-module',
+//  'letsrule-POP',
   'city-module',
-  'models-company',
-  'product-model'
+  'models.country',
+  'models.product',
+  'models.company'
   ]
 )
 .service('engine', 

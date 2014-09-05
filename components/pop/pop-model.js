@@ -1,14 +1,15 @@
 (function(){
   // POP Module
 
-  var module = angular.module('letsrule-POP',[
-    
+  var module = angular.module('models.pop',[
+    'modules.pool'
     ] )
-  .factory('POP', [function(){
+  .factory('POP', ['Pool',function(Pool){
     function POP(popdata) {
       if (popdata) {
         this.setData(popdata);
       }
+      this.id = Pool.POPS.getLength();
 
       this.needs = {
         'basic': {
@@ -18,6 +19,8 @@
 
         }
       };
+
+      Pool.POPS.add(this);
     };
 
     POP.prototype = {
@@ -34,37 +37,6 @@
 
     return POP;
 
-  }])
-  .service('POPManager', ['POP', function(POP){
-    var POPManager = {
-      _pool: {},
-      _retrieveInstance: function(POPId,POPData){
-        var instance = this._pool[POPId];
-
-        if (instance) {
-          instance.setData(POPData);
-        } else {
-          instance = new POP(POPData);
-          this._pool[POPId] = instance;
-        }
-
-        return instance;
-      },
-      _search: function(POPId){
-        return this._pool[POPId];
-      },
-
-      getPOP: function(POPId) {
-        var deferred = $q.defer();
-        var pop = this._search(POPId);
-        if (pop) {
-          deferred.resolve(pop);
-        } 
-
-        return deferred.promise;
-      },
-      
-    }
   }])
   
 })();

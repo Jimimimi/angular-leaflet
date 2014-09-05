@@ -4,8 +4,7 @@ var app = angular.module('lets-rule',
   [
     'letsrule-map',
     'letsrule-eventHandler',
-    'letsrule-engine',
-    'ngAnimate'
+    'letsrule-engine'
   ]
 );
         

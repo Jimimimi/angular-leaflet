@@ -13,47 +13,48 @@
 //    });
 //
 //  });
-  module.factory('POP', function(Pool){
-    function POP(data,parent){
-      this.id = Pool.POPS.getLength();
-      this._parent = parent;
-      this.poptype = data.poptype;
-      this.amount = data.amount;
-      this.location = parent.name;
-      this.economy = {
-        income: 0,
-        expenses: 0,
-        savings: 0,
-        market: parent.economy.market
-      };
-    
-      this.needs = {
-        'basic': {
 
-        },
-        'luxury': {
-
-        }
-      };
-
-      this.grow = function(){
-        this.amount += 100;
-      };
-      this.consume = function(){
-        for (var i in this.needs){
-          var total = (this.needs[i] * this.amount);
-          var totalcost = (this.economy.market[i].price * total);
-          this.economy.market[i].amount -= total;
-          this.economy.expenses += totalcost;
-          console.log(this.amount +' '+this.poptype+'s from ' + this.location +' consumed ' + (total*1000) +' kgs of '+ i)
-        }
-      };
-
-      Pool.POPS.add(this);
-    }
-
-    return POP;
-  });
+//  module.factory('POP', function(Pool){
+//    function POP(data,parent){
+//      this.id = Pool.POPS.getLength();
+//      this._parent = parent;
+//      this.poptype = data.poptype;
+//      this.amount = data.amount;
+//      this.location = parent.name;
+//      this.economy = {
+//        income: 0,
+//        expenses: 0,
+//        savings: 0,
+//        market: parent.economy.market
+//      };
+//
+//      this.needs = {
+//        'basic': {
+//
+//        },
+//        'luxury': {
+//
+//        }
+//      };
+//
+//      this.grow = function(){
+//        this.amount += 100;
+//      };
+//      this.consume = function(){
+//        for (var i in this.needs){
+//          var total = (this.needs[i] * this.amount);
+//          var totalcost = (this.economy.market[i].price * total);
+//          this.economy.market[i].amount -= total;
+//          this.economy.expenses += totalcost;
+//          console.log(this.amount +' '+this.poptype+'s from ' + this.location +' consumed ' + (total*1000) +' kgs of '+ i)
+//        }
+//      };
+//
+//      Pool.POPS.add(this);
+//    }
+//
+//    return POP;
+//  });
 
   module.factory('City', function(POP,Pool){
     function City(data,parent){
@@ -84,8 +85,15 @@
       var getPops = function(){
         var arr = [];
         for (var i in data.pops){
-          var pop = new POP(data.pops[i],self);
-          pop.location = self.name;
+          var dat = data.pops[i];
+          dat.economy = {
+            income: 0,
+            expenses: 0,
+            savings: 0,
+            market: self.economy.market
+          };
+          var pop = new POP(dat);
+          pop.migrate(self.name);
           arr.push(pop);
         }
         return arr;

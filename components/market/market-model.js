@@ -1,5 +1,5 @@
 (function(){
-  angular.module('models-market', ['models-company'])
+  angular.module('models.market', ['models.company'])
   .factory('Market', function(Company){
     function Market(){
       var self = this;
